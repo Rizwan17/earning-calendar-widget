@@ -1,0 +1,32 @@
+.earningWidgetContainer {
+    width: 1000px;
+    background: #dcb482;
+    padding: 10px;
+}
+.columnHeader {
+    text-align: center;
+    font-size: 14px;
+    width: 200px;
+}
+.columnHeader2{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin: 10px 0;
+    font-size: 12px;
+}
+.earningWidgetHeader {
+    display: flex;
+    align-items: center;
+}
+.headertitle {
+    flex: 1;
+    align-self: center;
+    text-align: center;
+    font-family: sans-serif;
+}
+.calendarColumnContainer{
+    display: flex;
+    gap: 5px;
+    margin: 20px 0;
+  }

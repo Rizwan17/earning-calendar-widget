@@ -1,0 +1,43 @@
+
+.columnWrapper {
+    width: 200px;
+}
+.columnHeader {
+    text-align: center;
+    font-size: 14px;
+    width: 200px;
+}
+.columnHeader2{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin: 10px 0;
+    font-size: 12px;
+    box-sizing: border-box;
+    padding: 0 10px;
+}
+.columnHeader2 h2 {
+    font-weight: 400 !important;
+}
+.logo {
+    width: 70px;
+    height: 70px;
+}
+.tickerText {
+    color: grey;
+    border: 1px solid grey;
+    font-size: 12px;
+    align-self: center;
+}
+
+.columnContainer {
+    display: flex;
+    justify-content: space-between;
+    background: white;
+    padding: 20px;
+}
+
+.calendarCell{ 
+    display: flex;
+    flex-direction: column;
+}
