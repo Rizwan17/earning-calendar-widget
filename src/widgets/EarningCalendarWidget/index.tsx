@@ -24,6 +24,7 @@ interface IProps {
 
 const EarningCalendarWidget: FC<IProps> = ({ fromDate, toDate }) => {
   const [earnings, setEarnings] = useState<FormattedEarningsData>({});
+  const [loader, setLoader] = useState(false);
 
   useEffect(() => {
     const init = async () => {
@@ -32,6 +33,7 @@ const EarningCalendarWidget: FC<IProps> = ({ fromDate, toDate }) => {
         to_date: toDate,
       };
 
+      setLoader(true);
       const result: EarningResponse = await fetchEarnings(params);
       if (result.error) {
         alert(JSON.stringify(result));
@@ -42,6 +44,7 @@ const EarningCalendarWidget: FC<IProps> = ({ fromDate, toDate }) => {
         const formattedEarnings = parseEarningsData(result.earnings);
         setEarnings(formattedEarnings);
       }
+      setLoader(false);
     };
 
     init();
@@ -57,11 +60,15 @@ const EarningCalendarWidget: FC<IProps> = ({ fromDate, toDate }) => {
         </div>
       </div>
 
-      <div className={styles.calendarColumnContainer}>
-        {Object.keys(earnings).map((date, index) => (
-          <CalendarColumn key={index} date={date} data={earnings[date]} />
-        ))}
-      </div>
+      {loader ? (
+        <p>loading...!</p>
+      ) : (
+        <div className={styles.calendarColumnContainer}>
+          {Object.keys(earnings).map((date, index) => (
+            <CalendarColumn key={index} date={date} data={earnings[date]} />
+          ))}
+        </div>
+      )}
     </div>
   );
 };
