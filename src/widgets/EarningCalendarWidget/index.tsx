@@ -38,9 +38,6 @@ const EarningCalendarWidget: FC<IProps> = ({ fromDate, toDate }) => {
       if (result.error) {
         alert(JSON.stringify(result));
       } else if (result.earnings) {
-        console.log(result);
-
-        // setEarnings(result.earnings);
         const formattedEarnings = parseEarningsData(result.earnings);
         setEarnings(formattedEarnings);
       }

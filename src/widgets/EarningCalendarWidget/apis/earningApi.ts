@@ -58,7 +58,6 @@ export const fetchEarnings = async (
     const jsonResp = await resp.json();
     return jsonResp;
   } catch (error) {
-    console.log(error);
     return { error };
   }
 };

@@ -10,7 +10,7 @@ export interface FormattedEarning {
 }
 
 export const parseEarningsData = (earnings: EarningData[]): FormattedEarningsData => {
-  const formattedEarnings: any = {};
+  const formattedEarnings: FormattedEarningsData = {};
   earnings.forEach((earning: EarningData, index: number) => {
     const { date, time } = earning;
     if (!formattedEarnings[date]) {
