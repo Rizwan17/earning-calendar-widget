@@ -11,6 +11,7 @@ import { FormattedEarningsData, parseEarningsData } from "./helpers";
 import styles from "./style.module.css";
 import { CalendarColumn } from "./components/CalendarColumn";
 import EarningWishpersLogo from "./components/EarningWishperLogo";
+import { fetchLogo, LogoResponse } from "./apis/logoApi";
 
 interface IProps {
   fromDate: string;
@@ -27,6 +28,28 @@ const EarningCalendarWidget: FC<IProps> = ({ fromDate, toDate }) => {
   const [loader, setLoader] = useState(false);
 
   useEffect(() => {
+    const getEarningImages = async (data: EarningData[]) => {
+      const promises: Promise<any>[] = [];
+      const earningMap: Map<string, EarningData> = new Map();
+      data.forEach((earningData: EarningData) => {
+        promises.push(fetchLogo(earningData.ticker));
+        earningMap.set(earningData.ticker, earningData);
+      });
+
+      const imagesResp: LogoResponse[] = await Promise.all(promises);
+
+      imagesResp.forEach((imgData: LogoResponse) => {
+        if (imgData.data && imgData.data.length > 0) {
+          const { files, search_key } = imgData.data[0];
+          const earningData = earningMap.get(search_key);
+          if (earningData) {
+            earningData.imageUrl = files.mark_vector_light;
+          }
+        }
+      });
+
+      return data;
+    };
     const init = async () => {
       const params: Params = {
         from_date: fromDate,
@@ -38,7 +61,10 @@ const EarningCalendarWidget: FC<IProps> = ({ fromDate, toDate }) => {
       if (result.error) {
         alert(JSON.stringify(result));
       } else if (result.earnings) {
-        const formattedEarnings = parseEarningsData(result.earnings);
+        const earningsCopy = [...result.earnings];
+        const updatedEarnings = await getEarningImages(earningsCopy);
+        const formattedEarnings = parseEarningsData(updatedEarnings);
+
         setEarnings(formattedEarnings);
       }
       setLoader(false);

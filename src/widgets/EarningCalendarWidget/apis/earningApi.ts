@@ -31,6 +31,7 @@ export interface EarningData {
   ticker: string;
   time: string;
   updated: number;
+  imageUrl?: string;
 }
 
 export interface Params {

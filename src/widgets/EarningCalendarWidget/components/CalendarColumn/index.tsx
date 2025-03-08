@@ -29,14 +29,22 @@ export const CalendarColumn: FC<IProps> = ({ date, data }) => {
         {/* before open column */}
         <section>
           {data.before_open.map((earning: EarningData, index: number) => (
-            <CalendarCell logo={earning.ticker} ticker={earning.ticker} />
+            <CalendarCell
+              key={index}
+              logo={earning.imageUrl || ""}
+              ticker={earning.ticker}
+            />
           ))}
         </section>
 
         {/* after close column */}
         <section>
           {data.after_close.map((earning: EarningData, index: number) => (
-            <CalendarCell logo={earning.ticker} ticker={earning.ticker} />
+            <CalendarCell
+              key={index}
+              logo={earning.imageUrl || ""}
+              ticker={earning.ticker}
+            />
           ))}
         </section>
       </section>
@@ -48,21 +56,19 @@ const CalendarCell: FC<{ logo: string; ticker: string }> = ({
   logo,
   ticker,
 }) => {
-  const [logoUrl, setLogoUrl] = useState<string>("");
-
-  useEffect(() => {
-    fetchLogo(logo).then((result) => {
-      if (result.data) {
-        setLogoUrl(result.data[0].files.mark_vector_light || "");
-      }
-    });
-  }, []);
+  // useEffect(() => {
+  //   fetchLogo(logo).then((result) => {
+  //     if (result.data) {
+  //       setLogoUrl(result.data[0].files.mark_vector_light || "");
+  //     }
+  //   });
+  // }, []);
 
   return (
     <a target="_blank" href={`https://www.benzinga.com/quote/${ticker}`}>
       <div className={styles.calendarCell}>
         <span className={styles.tickerText}>{ticker}</span>
-        <img src={logoUrl} className={styles.logo} />
+        <img src={logo} className={styles.logo} />
       </div>
     </a>
   );

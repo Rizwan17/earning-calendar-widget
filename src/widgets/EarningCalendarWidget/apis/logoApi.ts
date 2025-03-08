@@ -21,7 +21,7 @@ interface File {
 export const fetchLogo = async (logo: string): Promise<LogoResponse> => {
   const queryParams = new URLSearchParams({
     token: API_KEY,
-    search_keys: `${logo},TLSA,NVDA`,
+    search_keys: `${logo}`,
     search_keys_type: `symbol`,
     fields: "mark_vector_light",
   }).toString();
