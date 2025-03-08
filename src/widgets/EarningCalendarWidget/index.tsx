@@ -19,10 +19,10 @@ interface IProps {
 
 /**
  * @author
- * @function @EarningWidget
+ * @function @EarningCalendarWidget
  **/
 
-const EarningWidget: FC<IProps> = ({ fromDate, toDate }) => {
+const EarningCalendarWidget: FC<IProps> = ({ fromDate, toDate }) => {
   const [earnings, setEarnings] = useState<FormattedEarningsData>({});
 
   useEffect(() => {
@@ -66,4 +66,4 @@ const EarningWidget: FC<IProps> = ({ fromDate, toDate }) => {
   );
 };
 
-export default EarningWidget;
+export default EarningCalendarWidget;

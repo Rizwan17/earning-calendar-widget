@@ -1,6 +1,6 @@
 import "./App.css";
-import EarningWidget from "./widgets/EarningWidget";
-import { getFormattedDate } from "./widgets/EarningWidget/utils";
+import EarningCalendarWidget from "./widgets/EarningCalendarWidget";
+import { getFormattedDate } from "./widgets/EarningCalendarWidget/utils";
 
 function App() {
   const lastQuarter = new Date();
@@ -8,7 +8,7 @@ function App() {
 
   return (
     <div className="App">
-      <EarningWidget
+      <EarningCalendarWidget
         fromDate={getFormattedDate(lastQuarter)}
         toDate={getFormattedDate(new Date())}
       />

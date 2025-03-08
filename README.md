@@ -12,6 +12,6 @@ In the project directory, you can run:
 
 this widget requires two props fromDate and toDate and thats it
 
-### `import EarningWidget from "./widgets/EarningWidget";`
+### `import EarningCalendarWidget from "./widgets/EarningWidget";`
 
-### `<EarningWidget fromDate={getFormattedDate(lastQuarter)} toDate={getFormattedDate(new Date())}/>`
+### `<EarningCalendarWidget fromDate={getFormattedDate(lastQuarter)} toDate={getFormattedDate(new Date())}/>`
