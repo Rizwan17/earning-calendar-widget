@@ -6,8 +6,8 @@ import { getDayName } from "../../utils";
 import { FormattedEarning } from "../../helpers";
 
 interface IProps {
-  date: string;
-  data: FormattedEarning;
+  date?: string;
+  data?: FormattedEarning;
 }
 
 /**
@@ -17,37 +17,26 @@ interface IProps {
 
 export const CalendarColumn: FC<IProps> = ({ date, data }) => {
   return (
-    <div className={styles.columnWrapper}>
-      <header className={styles.columnHeader}>
-        <h3>{getDayName(date)}</h3>
-        <div className={styles.columnHeader2}>
-          <h4>Before Open</h4>
-          <h4>After Close</h4>
-        </div>
-      </header>
-      <section className={styles.columnContainer}>
-        {/* before open column */}
-        <section>
-          {data.before_open.map((earning: EarningData, index: number) => (
-            <CalendarCell
-              key={index}
-              logo={earning.imageUrl || ""}
-              ticker={earning.ticker}
-            />
-          ))}
-        </section>
+    <div className={styles.columnContainer}>
+      {/* before open */}
+      <div className={styles.beforeOpenContainer}>
+        {data?.before_open.map((earningData: EarningData, index: number) => (
+          <CalendarCell
+            logo={earningData.imageUrl || ""}
+            ticker={earningData.ticker}
+          />
+        ))}
+      </div>
 
-        {/* after close column */}
-        <section>
-          {data.after_close.map((earning: EarningData, index: number) => (
-            <CalendarCell
-              key={index}
-              logo={earning.imageUrl || ""}
-              ticker={earning.ticker}
-            />
-          ))}
-        </section>
-      </section>
+      {/* after open */}
+      <div className={styles.beforeOpenContainer}>
+        {data?.after_close.map((earningData: EarningData, index: number) => (
+          <CalendarCell
+            logo={earningData.imageUrl || ""}
+            ticker={earningData.ticker}
+          />
+        ))}
+      </div>
     </div>
   );
 };
@@ -65,10 +54,18 @@ const CalendarCell: FC<{ logo: string; ticker: string }> = ({
   // }, []);
 
   return (
-    <a target="_blank" href={`https://www.benzinga.com/quote/${ticker}`}>
-      <div className={styles.calendarCell}>
-        <span className={styles.tickerText}>{ticker}</span>
-        <img src={logo} className={styles.logo} />
+    <a
+      target="_blank"
+      href={`https://www.benzinga.com/quote/${ticker}`}
+      className={styles.companyLink}
+    >
+      <div className={styles.companyContainer}>
+        <div className={styles.companyName}>
+          <span>{ticker}</span>
+        </div>
+        <div className={styles.companyLogo}>
+          <img src={logo} className={styles.companyLogoImg} alt="" />
+        </div>
       </div>
     </a>
   );

@@ -12,6 +12,7 @@ import styles from "./style.module.css";
 import { CalendarColumn } from "./components/CalendarColumn";
 import EarningWishpersLogo from "./components/EarningWishperLogo";
 import { fetchLogo, LogoResponse } from "./apis/logoApi";
+import { CalendarColumnHeader } from "./components/CalendarColumnHeader";
 
 interface IProps {
   fromDate: string;
@@ -65,6 +66,7 @@ const EarningCalendarWidget: FC<IProps> = ({ fromDate, toDate }) => {
         const updatedEarnings = await getEarningImages(earningsCopy);
         const formattedEarnings = parseEarningsData(updatedEarnings);
 
+        console.log(formattedEarnings);
         setEarnings(formattedEarnings);
       }
       setLoader(false);
@@ -83,15 +85,23 @@ const EarningCalendarWidget: FC<IProps> = ({ fromDate, toDate }) => {
         </div>
       </div>
 
-      {loader ? (
-        <p>loading...!</p>
-      ) : (
-        <div className={styles.calendarColumnContainer}>
+      <div className={styles.calendarColumnContainer}>
+        {loader ? (
+          <p>loading...</p>
+        ) : (
+          <div className={styles.columnWrapper}>
+            {Object.keys(earnings).map((date, index) => (
+              <CalendarColumnHeader key={index} date={date} />
+            ))}
+          </div>
+        )}
+
+        <div className={styles.columnBodyWrapper}>
           {Object.keys(earnings).map((date, index) => (
-            <CalendarColumn key={index} date={date} data={earnings[date]} />
+            <CalendarColumn key={index} data={earnings[date]} />
           ))}
         </div>
-      )}
+      </div>
     </div>
   );
 };

@@ -1,7 +1,19 @@
 .earningWidgetContainer {
-    width: 1000px;
+    width: 960px;
+    height: 600px;
+    overflow: hidden;
     background: #dcb482;
-    padding: 10px;
+    padding: 5px;
+}
+.columnWrapper {
+    display: flex;
+    gap: 10px;
+}
+.columnBodyWrapper {
+    display: flex; 
+    height: 450px; 
+    gap: 5px;
+    margin-top: 10px
 }
 .columnHeader {
     text-align: center;
@@ -18,6 +30,7 @@
 .earningWidgetHeader {
     display: flex;
     align-items: center;
+    height: 100px;
 }
 .headertitle {
     flex: 1;
@@ -25,8 +38,12 @@
     text-align: center;
     font-family: sans-serif;
 }
-.calendarColumnContainer{
-    display: flex;
+.headertitle h1 {
+    font-size: 24px;
+}
+/* .calendarColumnContainer{
+    display: grid;
+    grid-template-columns: repeat(5, 190px);
+    grid-template-rows: 50px 450px;
     gap: 5px;
-    margin: 20px 0;
-  }
+  } */
