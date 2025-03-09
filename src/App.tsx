@@ -1,16 +1,18 @@
 import "./App.css";
 import EarningCalendarWidget from "./widgets/EarningCalendarWidget";
-import { getFormattedDate } from "./widgets/EarningCalendarWidget/utils";
+import {
+  getFormattedDate,
+  getLastQuarterDates,
+} from "./widgets/EarningCalendarWidget/utils";
 
 function App() {
-  const lastQuarter = new Date();
-  lastQuarter.setMonth(lastQuarter.getMonth() - 3);
+  const { startDate, endDate } = getLastQuarterDates();
 
   return (
     <div className="App">
       <EarningCalendarWidget
-        fromDate={getFormattedDate(lastQuarter)}
-        toDate={getFormattedDate(new Date())}
+        fromDate={getFormattedDate(startDate)}
+        toDate={getFormattedDate(endDate)}
       />
     </div>
   );

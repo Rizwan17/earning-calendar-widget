@@ -1,6 +1,7 @@
 .earningWidgetContainer {
     width: 960px;
     height: 600px;
+    flex-shrink: 0;
     overflow: hidden;
     background: #dcb482;
     padding: 5px;
@@ -19,6 +20,7 @@
     text-align: center;
     font-size: 14px;
     width: 200px;
+    flex-shrink: 0;
 }
 .columnHeader2{
     display: flex;

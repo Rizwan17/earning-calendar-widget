@@ -3,7 +3,7 @@ import styles from "./style.module.css";
 import { getDayName } from "../../utils";
 
 interface IProps {
-  date: string;
+  day: string;
 }
 
 /**
@@ -11,10 +11,10 @@ interface IProps {
  * @function @CalendarColumnHeader
  **/
 
-export const CalendarColumnHeader: FC<IProps> = ({ date }) => {
+export const CalendarColumnHeader: FC<IProps> = ({ day }) => {
   return (
     <div className={styles.columnHeaderContainer}>
-      <p className={styles.day}>{getDayName(date)}</p>
+      <p className={styles.day}>{day}</p>
       <div className={styles.openClose}>
         <p>Before Open</p>
         <p>After Close</p>

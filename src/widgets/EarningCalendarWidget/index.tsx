@@ -90,15 +90,15 @@ const EarningCalendarWidget: FC<IProps> = ({ fromDate, toDate }) => {
           <p>loading...</p>
         ) : (
           <div className={styles.columnWrapper}>
-            {Object.keys(earnings).map((date, index) => (
-              <CalendarColumnHeader key={index} date={date} />
+            {Object.keys(earnings).map((day, index) => (
+              <CalendarColumnHeader key={index} day={day} />
             ))}
           </div>
         )}
 
         <div className={styles.columnBodyWrapper}>
-          {Object.keys(earnings).map((date, index) => (
-            <CalendarColumn key={index} data={earnings[date]} />
+          {Object.keys(earnings).map((day, index) => (
+            <CalendarColumn key={index} data={earnings[day]} />
           ))}
         </div>
       </div>

@@ -1,4 +1,5 @@
 import { EarningData } from "../apis/earningApi";
+import { getDayName } from "../utils";
 
 export interface FormattedEarningsData {
   [key: string]: FormattedEarning
@@ -13,25 +14,33 @@ export const parseEarningsData = (earnings: EarningData[]): FormattedEarningsDat
   const formattedEarnings: FormattedEarningsData = {};
   earnings.forEach((earning: EarningData, index: number) => {
     const { date, time } = earning;
-    if (!formattedEarnings[date]) {
-      formattedEarnings[date] = {
+    const day = getDayName(date);
+    if(day === "Sunday") return;
+
+    if (!formattedEarnings[day]) {
+      formattedEarnings[day] = {
         before_open: [],
         after_close: [],
       };
     }
 
-    if (time < "16:00:00") {
-      formattedEarnings[date].before_open.push(earning);
-    } else {
-      formattedEarnings[date].after_close.push(earning);
-    }
-
+    if(time < "09:30:00") {
+      formattedEarnings[day].before_open.push(earning);
+    }else if (time >= "16:00:00") {
+      formattedEarnings[day].after_close.push(earning);
+     
+    } 
   });
 
-  const sortedEarnings = Object.keys(formattedEarnings).sort().reduce((acc, key) => {
-    acc[key] = formattedEarnings[key];
-    return acc;
-  }, {} as FormattedEarningsData);
+  const orderedDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
+  const sortedFormattedEarnings: FormattedEarningsData = {};
 
-  return sortedEarnings;
+  orderedDays.forEach(day => {
+    if (formattedEarnings[day]) {
+      sortedFormattedEarnings[day] = formattedEarnings[day];
+    }
+  });
+
+  return sortedFormattedEarnings;
+
 };
